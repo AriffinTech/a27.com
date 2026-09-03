@@ -1,0 +1,30 @@
+[
+  {
+    "date": "2026-09-01",
+    "macrostructure": "Split Studio",
+    "theme": "custom",
+    "theme_axes": "dark / geometric-sans / cool",
+    "enrichment": "real project screenshots",
+    "brief": "A27 case studies"
+  },
+  {
+    "date": "2026-08-26",
+    "macrostructure": "Bento Grid",
+    "theme": "custom",
+    "theme_axes": "light / geometric-sans / neutral",
+    "vibe": "technical, premium, minimal, exact",
+    "enrichment": "none",
+    "brief": "A27 · product engineering agency"
+  },
+  {
+    "date": "2026-08-26",
+    "review": "final anti-slop audit",
+    "result": "passed",
+    "checks": [
+      "No fabricated proof, customer logos, testimonials, awards, or partnership claims",
+      "No repeated icon-tile pattern, nested cards, or unrelated artwork",
+      "Radial shading and the restrained frost header remain within the supplied hero direction",
+      "Colors, spacing, radii, motion, and focus states use shared tokens"
+    ]
+  }
+]
