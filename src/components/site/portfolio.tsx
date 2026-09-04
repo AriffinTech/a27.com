@@ -16,6 +16,11 @@ export function Portfolio() {
             <p className={styles.caseStudy__category}>{caseStudy.category}</p>
             <h2>{caseStudy.title}</h2>
             <p className={styles.caseStudy__summary}>{caseStudy.summary}</p>
+            {caseStudy.businessNeed ? <dl className={styles.caseStudy__facts}>
+              <div><dt>Business need</dt><dd>{caseStudy.businessNeed}</dd></div>
+              <div><dt>What A27 built</dt><dd>{caseStudy.whatBuilt}</dd></div>
+              <div><dt>What it enables</dt><dd>{caseStudy.whatItEnables}</dd></div>
+            </dl> : null}
             <ul className={styles.caseStudy__deliverables} aria-label={`${caseStudy.title} included work`}>
               {caseStudy.deliverables.map((deliverable) => <li key={deliverable}>{deliverable}</li>)}
             </ul>

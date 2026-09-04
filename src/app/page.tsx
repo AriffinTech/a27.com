@@ -31,13 +31,13 @@ export default function HomePage() {
           title="Pricing"
           intro="Clear, upfront pricing."
         >
-          <Pricing />
+          <Pricing compact />
         </SectionFrame>
 
         <SectionFrame
           title="Frequently Asked Questions"
         >
-          <Faq />
+          <Faq limit={5} />
         </SectionFrame>
 
         <CtaBand />

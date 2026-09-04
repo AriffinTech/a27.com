@@ -4,6 +4,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -22,6 +23,7 @@ const pageLinks = [
 ];
 
 export function SiteHeader() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const scrolledRef = useRef(false);
@@ -64,8 +66,9 @@ export function SiteHeader() {
                 {pageLinks.map((link) => (
                   <NavigationMenuItem key={link.title}>
                     <NavigationMenuLink asChild>
-                      <Link href={link.href} className={cn(
-                        "group inline-flex w-max items-center justify-center rounded-[var(--radius-md)] px-4 py-2 text-[var(--text-sm)] font-semibold text-[var(--color-ink-2)] outline-none transition-colors hover:bg-[var(--color-paper-2)] hover:text-[var(--color-ink)] focus:bg-[var(--color-paper-2)] focus:text-[var(--color-ink)]"
+                      <Link href={link.href} aria-current={pathname === link.href ? "page" : undefined} className={cn(
+                        "group inline-flex w-max items-center justify-center rounded-[var(--radius-md)] px-4 py-2 text-[var(--text-sm)] font-semibold text-[var(--color-ink-2)] outline-none transition-colors hover:bg-[var(--color-paper-2)] hover:text-[var(--color-ink)] focus:bg-[var(--color-paper-2)] focus:text-[var(--color-ink)]",
+                        pathname === link.href && "bg-[var(--color-paper-2)] text-[var(--color-ink)]"
                       )}>
                         {link.title}
                       </Link>
@@ -103,7 +106,7 @@ export function SiteHeader() {
             <div className="grid border-t border-[var(--color-rule)]">
               {pageLinks.map((link) => (
                 <Dialog.Close asChild key={link.title}>
-                  <Link href={link.href} className="flex min-h-14 items-center border-b border-[var(--color-rule)] font-[family-name:var(--font-display)] text-[var(--text-lg)] font-semibold text-[var(--color-ink)] transition-colors hover:text-[var(--color-accent)]">
+                  <Link href={link.href} aria-current={pathname === link.href ? "page" : undefined} className="flex min-h-14 items-center border-b border-[var(--color-rule)] font-[family-name:var(--font-display)] text-[var(--text-lg)] font-semibold text-[var(--color-ink)] transition-colors hover:text-[var(--color-accent)]">
                     {link.title}
                   </Link>
                 </Dialog.Close>

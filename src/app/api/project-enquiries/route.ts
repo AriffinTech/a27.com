@@ -1,3 +1,5 @@
+import { isPricingInterest, isProjectType, projectTypeLabels, type ProjectType } from "@/config/project-enquiries";
+
 type ProjectEnquiry = {
   name: string;
   email: string;
@@ -7,15 +9,8 @@ type ProjectEnquiry = {
   timeline: string;
   message: string;
   officeLocation: string;
+  interest?: string;
 };
-
-const projectTypes = new Set([
-  "Website or digital presence",
-  "Enquiries, WhatsApp, or follow-ups",
-  "Business workflow or integration",
-  "Internal system or dashboard",
-  "Not sure yet",
-]);
 
 function text(value: unknown, maxLength: number) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -34,11 +29,12 @@ function escapeHtml(value: string) {
 function formatEmail(enquiry: ProjectEnquiry) {
   const rows = [
     ["Name", enquiry.name],
-    ["Work email", enquiry.email],
+    ["Email", enquiry.email],
     ["Business", enquiry.company],
     ["Website or social link", enquiry.companyWebsite],
-    ["What needs attention", enquiry.projectType],
+    ["What needs attention", projectTypeLabels[enquiry.projectType as ProjectType] ?? enquiry.projectType],
     ["Ideal timing", enquiry.timeline],
+    ["Package interest", enquiry.interest],
   ].filter(([, value]) => value);
 
   const textBody = [
@@ -52,7 +48,7 @@ function formatEmail(enquiry: ProjectEnquiry) {
 
   const htmlBody = `
     <h1>New A27 project enquiry</h1>
-    <table>${rows.map(([label, value]) => `<tr><th align="left">${escapeHtml(label)}</th><td>${escapeHtml(value)}</td></tr>`).join("")}</table>
+    <table>${rows.map(([label, value]) => `<tr><th align="left">${escapeHtml(label ?? "")}</th><td>${escapeHtml(value ?? "")}</td></tr>`).join("")}</table>
     <h2>Project details</h2>
     <p>${escapeHtml(enquiry.message).replace(/\n/g, "<br />")}</p>
   `;
@@ -78,14 +74,19 @@ export async function POST(request: Request) {
     timeline: text(input.timeline, 100),
     message: text(input.message, 4000),
     officeLocation: text(input.officeLocation, 160),
+    interest: text(input.interest, 40),
   };
 
   if (enquiry.officeLocation) {
     return Response.json({ ok: true });
   }
 
-  if (!enquiry.name || !/^\S+@\S+\.\S+$/.test(enquiry.email) || !projectTypes.has(enquiry.projectType) || !enquiry.message) {
+  if (!enquiry.name || !/^\S+@\S+\.\S+$/.test(enquiry.email) || !isProjectType(enquiry.projectType) || !enquiry.message) {
     return Response.json({ message: "Please complete the required fields and try again." }, { status: 400 });
+  }
+
+  if (enquiry.interest && !isPricingInterest(enquiry.interest)) {
+    return Response.json({ message: "Please choose a valid package and try again." }, { status: 400 });
   }
 
   if (enquiry.companyWebsite && !/^https?:\/\/.+/i.test(enquiry.companyWebsite)) {
@@ -113,7 +114,7 @@ export async function POST(request: Request) {
       from,
       to: [recipient],
       reply_to: enquiry.email,
-      subject: `New project enquiry: ${enquiry.projectType}`,
+      subject: `New project enquiry: ${projectTypeLabels[enquiry.projectType as ProjectType]}`,
       text: textBody,
       html: htmlBody,
     }),

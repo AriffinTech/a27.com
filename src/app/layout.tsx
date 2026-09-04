@@ -11,8 +11,8 @@ import { siteConfig } from "@/config/site";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "A27 — Product engineering",
-    template: "%s — A27",
+    default: "A27 | Product engineering",
+    template: "%s | A27",
   },
   description: siteConfig.description,
   alternates: { canonical: "/" },
@@ -21,14 +21,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: siteConfig.name,
-    title: "A27 — Product engineering",
+    title: "A27 | Product engineering",
     description: siteConfig.description,
   },
 };
 
 export const viewport: Viewport = {
-  colorScheme: "light",
-  themeColor: "oklch(98.5% 0.004 250)",
+  colorScheme: "dark",
+  themeColor: "#09090b",
   width: "device-width",
   initialScale: 1,
 };

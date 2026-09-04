@@ -12,6 +12,9 @@ type CaseStudyBase = {
   summary: string;
   deliverables: readonly string[];
   confidentiality: "public" | "private";
+  businessNeed?: string;
+  whatBuilt?: string;
+  whatItEnables?: string;
 };
 
 export type PublishedCaseStudy = CaseStudyBase & {
@@ -35,6 +38,9 @@ export const caseStudies: readonly CaseStudy[] = [
     category: "Commerce website",
     summary: "A flower website where customers can browse by occasion, view individual bouquets, and place an order on WhatsApp.",
     deliverables: ["Product list", "Browse by occasion", "Bouquet enquiries", "WhatsApp ordering"],
+    businessNeed: "A flower business needed a simple way for customers to browse bouquets and enquire.",
+    whatBuilt: "A commerce website with occasion browsing, product pages, bouquet enquiries, and WhatsApp ordering.",
+    whatItEnables: "Customers can find a suitable bouquet and send an order enquiry directly.",
     confidentiality: "public",
     status: "published",
     image: {
@@ -51,6 +57,9 @@ export const caseStudies: readonly CaseStudy[] = [
     category: "Industrial services website",
     summary: "A clear website for industrial cleaning, corrosion protection, plant maintenance, equipment information, and direct enquiries.",
     deliverables: ["Service pages", "Equipment information", "Company information", "Ways to enquire"],
+    businessNeed: "An industrial services company needed a clear place to explain its services and equipment.",
+    whatBuilt: "A services website covering cleaning, corrosion protection, plant maintenance, equipment, and enquiries.",
+    whatItEnables: "Visitors can understand the services and choose a direct way to enquire.",
     confidentiality: "public",
     status: "published",
     image: {
@@ -67,6 +76,9 @@ export const caseStudies: readonly CaseStudy[] = [
     category: "Education website and registration",
     summary: "A Malay-language website for True SMC trading education, courses, coaching, student feedback, and registration.",
     deliverables: ["Course information", "Offer pages", "Student feedback", "Registration pages"],
+    businessNeed: "A trading education business needed one place for courses, coaching, student proof, and registration.",
+    whatBuilt: "A Malay-language education website with course information, coaching offers, student feedback, registration, and account-opening routes.",
+    whatItEnables: "Visitors can review the offers and follow the appropriate registration route.",
     confidentiality: "public",
     status: "published",
     image: {

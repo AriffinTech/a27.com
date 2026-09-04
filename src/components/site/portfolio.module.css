@@ -86,6 +86,16 @@
   line-height: 1.6;
 }
 
+.caseStudy__facts {
+  display: grid;
+  gap: var(--space-sm);
+  margin: var(--space-lg) 0 0;
+}
+
+.caseStudy__facts div { display: grid; gap: 0.2rem; }
+.caseStudy__facts dt { color: var(--color-muted); font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.06em; text-transform: uppercase; }
+.caseStudy__facts dd { margin: 0; color: var(--color-ink-2); font-size: var(--text-sm); line-height: 1.5; }
+
 .caseStudy__deliverables {
   display: flex;
   flex-wrap: wrap;

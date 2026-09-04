@@ -5,7 +5,7 @@ import { Reveal } from "@/components/site/reveal";
 export function ServiceGrid() {
   const groups = [
     {
-      id: "01 — WEBSITES",
+      id: "01 / WEBSITES",
       title: "Websites",
       description: "A clear, professional website that helps customers understand, enquire, and buy.",
       icon: LayoutTemplate,
@@ -20,7 +20,7 @@ export function ServiceGrid() {
       href: "/services"
     },
     {
-      id: "02 — AI AUTOMATION",
+      id: "02 / AI AUTOMATION",
       title: "AI Automation",
       description: "Automate replies, follow-ups, and repeated tasks so your team spends less time on admin.",
       icon: Workflow,
@@ -36,7 +36,7 @@ export function ServiceGrid() {
       href: "/services"
     },
     {
-      id: "03 — CUSTOM SOLUTIONS",
+      id: "03 / CUSTOM SOLUTIONS",
       title: "Custom Solutions",
       description: "Custom tools and systems built around your business when standard software does not fit.",
       icon: Code2,

@@ -85,23 +85,23 @@ export const services: Service[] = [
 
 export const processSteps = [
   {
-    title: "01 — Tell Us What You Need",
+    title: "01. Tell Us What You Need",
     body: "Client explains the business, problem, website or system they need.",
   },
   {
-    title: "02 — Agree on the Plan",
+    title: "02. Agree on the Plan",
     body: "A27 explains what to build, what it needs to do, and what it will cost.",
   },
   {
-    title: "03 — Confirm the Work",
+    title: "03. Confirm the Work",
     body: "Approve the plan, and A27 gets everything ready to begin.",
   },
   {
-    title: "04 — Build and Check",
+    title: "04. Build and Check",
     body: "A27 designs, builds, connects the needed tools, and improves the work with you.",
   },
   {
-    title: "05 — Launch and Show You How It Works",
+    title: "05. Launch and Show You How It Works",
     body: "After final checks, A27 puts it live and shows you how to use it.",
   },
 ];

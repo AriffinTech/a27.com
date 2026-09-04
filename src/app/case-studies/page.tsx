@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import { CtaBand } from "@/components/site/cta-band";
 import { Portfolio } from "@/components/site/portfolio";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 import styles from "@/components/site/portfolio.module.css";
 
@@ -16,15 +18,16 @@ export default function CaseStudiesPage() {
     <div className="page-shell page-shell--interior">
       <section className={`interior-hero ${styles.caseStudiesHero}`}>
         <p>✦ Selected Work</p>
-        <h1>Work built around real businesses.</h1>
-        <div>
-          <span>A selection of public websites and private systems designed around commerce, industrial services, education, and daily operations.</span>
+        <h1>Built for real businesses. Used in the real world.</h1>
+        <div className="flex-col !items-start">
+          <span>A look at websites, business systems, dashboards and automation we’ve built to solve actual operational problems.</span>
         </div>
+        <Button asChild className="mt-6" size="lg" variant="primary"><Link href="/start-a-project">Start a Project</Link></Button>
       </section>
       <Portfolio />
       <CtaBand
-        title="Need something built around the way you work?"
-        body="Tell us where the current process slows down. We’ll build the right tool around it."
+        title="See something your business could use?"
+        body="We can build around how your team works and what you need to improve."
       />
     </div>
   );

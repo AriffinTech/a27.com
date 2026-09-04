@@ -6,28 +6,28 @@ import { GridCard } from "@/components/ui/grid-card";
 export function WhatWeDo() {
   const pillars = [
     {
-      label: "01 — WEBSITES",
+      label: "01 / WEBSITES",
       title: "Websites",
       pain: "A clear, professional website that helps customers understand, enquire, and buy.",
-      capabilities: ["Business websites", "Landing pages", "Online shops", "Customer portals"],
+      capabilities: ["Business websites", "Landing pages", "Online shops"],
       icon: ToyBrick,
-      href: "/services#websites"
+      href: "/services?category=websites"
     },
     {
-      label: "02 — AI AUTOMATION",
+      label: "02 / AI AUTOMATION",
       title: "AI Automation",
       pain: "Automate replies, follow-ups, and repeated tasks so your team spends less time on admin.",
-      capabilities: ["WhatsApp replies", "Customer follow-ups", "Order and payment updates", "Lead handling"],
+      capabilities: ["WhatsApp replies", "Customer follow-ups", "Order updates"],
       icon: Workflow,
-      href: "/services#whatsapp-automation"
+      href: "/services?category=ai-automation"
     },
     {
-      label: "03 — CUSTOM SOLUTIONS",
+      label: "03 / CUSTOM SOLUTIONS",
       title: "Custom Solutions",
       pain: "Custom tools and systems built around your business when standard software does not fit.",
-      capabilities: ["Team dashboards", "Order and stock tools", "Customer management", "Software made for your business"],
+      capabilities: ["Team dashboards", "Order and stock tools", "Customer management"],
       icon: SquareActivity,
-      href: "/services#internal-systems"
+      href: "/services?category=custom-solutions"
     }
   ];
 
@@ -68,7 +68,7 @@ export function WhatWeDo() {
               </div>
 
               <Link href={pillar.href} className="inline-flex items-center justify-center gap-2 w-full min-h-[3rem] rounded-[var(--radius-pill)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] text-[var(--text-sm)] font-semibold text-[var(--color-ink)] transition-all duration-300 group-hover:border-[var(--color-accent)] group-hover:bg-[var(--color-accent)] group-hover:text-[var(--color-accent-ink)] mt-auto relative z-20">
-                See how we can help
+                Explore {pillar.title}
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
 

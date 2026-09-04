@@ -4,16 +4,18 @@ import { CheckCircle2, LoaderCircle, Send } from "lucide-react";
 import { FormEvent, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { isProjectType, pricingInterestLabels, projectTypeOptions, type PricingInterest, type ProjectType } from "@/config/project-enquiries";
 
 type ProjectEnquiry = {
   name: string;
   email: string;
   company: string;
   companyWebsite: string;
-  projectType: string;
+  projectType: ProjectType | "";
   timeline: string;
   message: string;
   officeLocation: string;
+  interest?: PricingInterest;
 };
 
 type FieldName = keyof ProjectEnquiry;
@@ -32,18 +34,19 @@ const initialEnquiry: ProjectEnquiry = {
 
 function validate(enquiry: ProjectEnquiry): Errors {
   const errors: Errors = {};
-  if (!enquiry.projectType) errors.projectType = "Please select an area.";
-  if (!enquiry.message.trim()) errors.message = "Please provide some project details.";
+  if (!isProjectType(enquiry.projectType)) errors.projectType = "Choose what you need help with.";
+  if (!enquiry.message.trim()) errors.message = "Tell us a little about what you need.";
   if (!enquiry.name.trim()) errors.name = "Add your name so we know how to address you.";
-  if (!/^\S+@\S+\.\S+$/.test(enquiry.email)) errors.email = "Enter a valid work email address.";
+  if (!/^\S+@\S+\.\S+$/.test(enquiry.email)) errors.email = "Enter a valid email address.";
   if (enquiry.companyWebsite && !/^https?:\/\/.+/i.test(enquiry.companyWebsite)) {
     errors.companyWebsite = "Use a full link starting with https://.";
   }
   return errors;
 }
 
-export function ProjectBriefForm() {
-  const [enquiry, setEnquiry] = useState<ProjectEnquiry>(initialEnquiry);
+export function ProjectBriefForm({ initialInterest }: { initialInterest?: PricingInterest }) {
+  const initialProjectType = initialInterest === "custom-tools" ? "custom-system" : initialInterest ? "website" : "";
+  const [enquiry, setEnquiry] = useState<ProjectEnquiry>({ ...initialEnquiry, projectType: initialProjectType, interest: initialInterest });
   const [errors, setErrors] = useState<Errors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -82,7 +85,7 @@ export function ProjectBriefForm() {
       }
 
       setIsSubmitted(true);
-      setEnquiry(initialEnquiry);
+      setEnquiry({ ...initialEnquiry, projectType: initialProjectType, interest: initialInterest });
     } catch (error) {
       setErrors({ form: error instanceof Error ? error.message : "Your message could not be sent. Please try again." });
     } finally {
@@ -107,8 +110,9 @@ export function ProjectBriefForm() {
 
   return (
     <form className="contact-form" noValidate onSubmit={handleSubmit}>
+      {initialInterest ? <p className="mb-6 text-sm text-[var(--color-muted)]">Asking about: <strong className="text-[var(--color-ink-2)]">{pricingInterestLabels[initialInterest]}</strong></p> : null}
       <div className="form-grid">
-        <Field label="What can we help you with?" error={errors.projectType} htmlFor="project-type">
+        <Field label="What kind of help do you need?" error={errors.projectType} htmlFor="project-type">
           <select
             aria-describedby={errors.projectType ? "project-type-error" : undefined}
             aria-invalid={Boolean(errors.projectType)}
@@ -119,11 +123,7 @@ export function ProjectBriefForm() {
             value={enquiry.projectType}
           >
             <option value="">Select an area...</option>
-            <option value="New website or redesign">New website or redesign</option>
-            <option value="Automating WhatsApp & customer enquiries">Automating WhatsApp & customer enquiries</option>
-            <option value="Connecting tools & business workflows">Connecting tools & business workflows</option>
-            <option value="Building a custom dashboard or system">Building a custom dashboard or system</option>
-            <option value="Not sure yet">Not sure yet</option>
+            {projectTypeOptions.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
           </select>
         </Field>
         <Field label="When do you want to start?" hint="Optional" htmlFor="timeline">
@@ -136,7 +136,7 @@ export function ProjectBriefForm() {
           </select>
         </Field>
       </div>
-      <Field label="Tell us about the project" error={errors.message} htmlFor="message">
+      <Field label="What do you need help with?" error={errors.message} htmlFor="message">
         <textarea
           aria-describedby={errors.message ? "message-error" : undefined}
           aria-invalid={Boolean(errors.message)}
@@ -162,7 +162,7 @@ export function ProjectBriefForm() {
             value={enquiry.name}
           />
         </Field>
-        <Field label="Work email" error={errors.email} htmlFor="email">
+        <Field label="Email address" error={errors.email} htmlFor="email">
           <input
             aria-describedby={errors.email ? "email-error" : undefined}
             aria-invalid={Boolean(errors.email)}
@@ -203,7 +203,7 @@ export function ProjectBriefForm() {
       </div>
       {errors.form ? <p className="form-message form-message--error" role="alert">{errors.form}</p> : null}
       <div className="contact-form__footer">
-        <p>We respect your privacy. Your information is securely sent directly to our team.</p>
+        <p>We’ll review your message and reply by email with the next step.</p>
         <Button disabled={isSubmitting} size="lg" type="submit" variant="primary">
           {isSubmitting ? <LoaderCircle aria-hidden="true" className="spin" size={17} /> : <Send aria-hidden="true" size={17} />}
           {isSubmitting ? "Sending message" : "Send your message"}

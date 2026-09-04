@@ -16,7 +16,7 @@ export function SiteFooter() {
         <span>© {new Date().getFullYear()} A27. Kuala Lumpur, Malaysia.</span>
         <nav aria-label="Footer navigation">
           {footerLinks.map((link) => (
-            <Link href={link.href} key={link.href}>{link.label}</Link>
+            <Link className="inline-flex min-h-11 items-center" href={link.href} key={link.href}>{link.label}</Link>
           ))}
         </nav>
         <a className="justify-self-end text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]" href={whatsappUrl} target="_blank" rel="noopener noreferrer">

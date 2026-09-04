@@ -20,7 +20,7 @@ export function HeroSection() {
         </Link>
         <h1 id="hero-title">
           We build your{" "}
-          <span className="hero-rotator" aria-label="business operations">
+          <span className="hero-rotator" aria-label="websites, AI automation, and custom solutions">
             <span aria-hidden="true" className="hero-rotator__track">
               {words.map((word) => <span key={word}>{word}</span>)}
               <span aria-hidden="true">business websites.</span>
@@ -30,7 +30,7 @@ export function HeroSection() {
           So your business keeps moving.
         </h1>
         <p>
-          We build websites and tools that help you reply to customers, take payments, and keep the day-to-day work moving.
+          A27 builds websites, AI automation, and custom solutions that help you manage customers, payments, and day-to-day work.
         </p>
         <div className="hero-section__actions">
           <Button asChild size="lg" variant="secondary"><Link href="/case-studies">View Work <ArrowRight aria-hidden="true" size={17} /></Link></Button>

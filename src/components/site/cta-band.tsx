@@ -10,8 +10,8 @@ type CtaBandProps = {
 };
 
 export function CtaBand({
-  title = "Tell us what’s slowing your business down.",
-  body = "We’ll help you work out whether you need a website, a way to connect your tools, or a system made for your business.",
+  title = "Have something in your business that could work better?",
+  body = "Tell us what you need. We’ll figure out the right way to build it.",
 }: CtaBandProps) {
   return (
     <section className="cta-band">

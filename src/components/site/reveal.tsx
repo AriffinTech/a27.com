@@ -18,6 +18,8 @@ export function Reveal({ children, className, delay = 0, ...props }: RevealProps
       return;
     }
 
+    node.classList.add("reveal-ready");
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

@@ -1,6 +1,6 @@
 import { FAQSection } from "@/components/ui/faq-section";
 
-export function Faq() {
+export function Faq({ limit }: { limit?: number } = {}) {
   const faqsLeft = [
     {
       question: "How much does a project cost?",
@@ -43,10 +43,13 @@ export function Faq() {
     }
   ];
 
+  const left = limit ? faqsLeft.slice(0, Math.ceil(limit / 2)) : faqsLeft;
+  const right = limit ? faqsRight.slice(0, Math.floor(limit / 2)) : faqsRight;
+
   return (
     <FAQSection
-      faqsLeft={faqsLeft}
-      faqsRight={faqsRight}
+      faqsLeft={left}
+      faqsRight={right}
       className="py-0 md:py-0"
     />
   );

@@ -9,7 +9,7 @@ export function WhatsAppButton() {
       href={whatsappUrl}
       target={whatsappConfigured ? "_blank" : "_self"}
       rel="noopener noreferrer"
-      className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[var(--z-sticky)] flex h-14 w-14 md:h-20 md:w-20 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_4px_14px_rgba(37,211,102,0.4)] transition-all duration-300 hover:scale-110 hover:shadow-[0_6px_20px_rgba(37,211,102,0.6)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-paper)]"
+      className="fixed bottom-4 right-4 z-[var(--z-sticky)] hidden h-20 w-20 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_4px_14px_rgba(37,211,102,0.4)] transition-all duration-300 hover:scale-110 hover:shadow-[0_6px_20px_rgba(37,211,102,0.6)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-paper)] md:flex md:bottom-6 md:right-6"
       aria-label="Message us on WhatsApp"
     >
       <svg 

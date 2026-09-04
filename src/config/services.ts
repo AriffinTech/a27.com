@@ -18,9 +18,9 @@ export const services: Service[] = [
 ];
 
 export const processSteps = [
-  { title: "Tell us what you need", body: "Tell us what is not working well and what you want to improve." },
-  { title: "Agree on the plan", body: "We explain what to build, what it needs to do, and what it will cost." },
-  { title: "Confirm the work", body: "Approve the plan, and we will get everything ready to begin." },
-  { title: "Build and check", body: "We design, build, connect your tools, and improve the work with you." },
-  { title: "Launch and show you how it works", body: "After final checks, we put it live and show you how to use it." },
+  { title: "Share the details", body: "Tell us what needs to work better." },
+  { title: "Shape what we’ll build", body: "We turn your message into a clear recommendation, requirements, and proposal." },
+  { title: "Confirm the direction", body: "Approve the plan, then we prepare the work for delivery." },
+  { title: "Build and review", body: "We design, develop, connect, and refine the work with you." },
+  { title: "Launch and show you how it works", body: "After final checks, we deploy and show you how to use the completed work." },
 ];
