@@ -1,12 +1,9 @@
 import { isPricingInterest, isProjectType, projectTypeLabels, type ProjectType } from "@/config/project-enquiries";
 
 type ProjectEnquiry = {
-  name: string;
-  email: string;
   company: string;
-  companyWebsite: string;
+  email: string;
   projectType: string;
-  timeline: string;
   message: string;
   officeLocation: string;
   interest?: string;
@@ -28,12 +25,9 @@ function escapeHtml(value: string) {
 
 function formatEmail(enquiry: ProjectEnquiry) {
   const rows = [
-    ["Name", enquiry.name],
-    ["Email", enquiry.email],
     ["Business", enquiry.company],
-    ["Website or social link", enquiry.companyWebsite],
+    ["Email", enquiry.email],
     ["What needs attention", projectTypeLabels[enquiry.projectType as ProjectType] ?? enquiry.projectType],
-    ["Ideal timing", enquiry.timeline],
     ["Package interest", enquiry.interest],
   ].filter(([, value]) => value);
 
@@ -66,12 +60,9 @@ export async function POST(request: Request) {
   }
 
   const enquiry: ProjectEnquiry = {
-    name: text(input.name, 120),
-    email: text(input.email, 254).toLowerCase(),
     company: text(input.company, 160),
-    companyWebsite: text(input.companyWebsite, 500),
+    email: text(input.email, 254).toLowerCase(),
     projectType: text(input.projectType, 100),
-    timeline: text(input.timeline, 100),
     message: text(input.message, 4000),
     officeLocation: text(input.officeLocation, 160),
     interest: text(input.interest, 40),
@@ -81,16 +72,12 @@ export async function POST(request: Request) {
     return Response.json({ ok: true });
   }
 
-  if (!enquiry.name || !/^\S+@\S+\.\S+$/.test(enquiry.email) || !isProjectType(enquiry.projectType) || !enquiry.message) {
+  if (!enquiry.company || !/^\S+@\S+\.\S+$/.test(enquiry.email) || !isProjectType(enquiry.projectType) || !enquiry.message) {
     return Response.json({ message: "Please complete the required fields and try again." }, { status: 400 });
   }
 
   if (enquiry.interest && !isPricingInterest(enquiry.interest)) {
     return Response.json({ message: "Please choose a valid package and try again." }, { status: 400 });
-  }
-
-  if (enquiry.companyWebsite && !/^https?:\/\/.+/i.test(enquiry.companyWebsite)) {
-    return Response.json({ message: "Please use a full website link starting with https://." }, { status: 400 });
   }
 
   const apiKey = process.env.RESEND_API_KEY;

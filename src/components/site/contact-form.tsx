@@ -7,12 +7,9 @@ import { Button } from "@/components/ui/button";
 import { isProjectType, pricingInterestLabels, projectTypeOptions, type PricingInterest, type ProjectType } from "@/config/project-enquiries";
 
 type ProjectEnquiry = {
-  name: string;
-  email: string;
   company: string;
-  companyWebsite: string;
+  email: string;
   projectType: ProjectType | "";
-  timeline: string;
   message: string;
   officeLocation: string;
   interest?: PricingInterest;
@@ -22,25 +19,19 @@ type FieldName = keyof ProjectEnquiry;
 type Errors = Partial<Record<FieldName | "form", string>>;
 
 const initialEnquiry: ProjectEnquiry = {
-  name: "",
-  email: "",
   company: "",
-  companyWebsite: "",
+  email: "",
   projectType: "",
-  timeline: "",
   message: "",
   officeLocation: "",
 };
 
 function validate(enquiry: ProjectEnquiry): Errors {
   const errors: Errors = {};
+  if (!enquiry.company.trim()) errors.company = "Enter your company name.";
+  if (!/^\S+@\S+\.\S+$/.test(enquiry.email)) errors.email = "Enter a valid email address.";
   if (!isProjectType(enquiry.projectType)) errors.projectType = "Choose what you need help with.";
   if (!enquiry.message.trim()) errors.message = "Tell us a little about what you need.";
-  if (!enquiry.name.trim()) errors.name = "Add your name so we know how to address you.";
-  if (!/^\S+@\S+\.\S+$/.test(enquiry.email)) errors.email = "Enter a valid email address.";
-  if (enquiry.companyWebsite && !/^https?:\/\/.+/i.test(enquiry.companyWebsite)) {
-    errors.companyWebsite = "Use a full link starting with https://.";
-  }
   return errors;
 }
 
@@ -112,7 +103,34 @@ export function ProjectBriefForm({ initialInterest }: { initialInterest?: Pricin
     <form className="contact-form" noValidate onSubmit={handleSubmit}>
       {initialInterest ? <p className="mb-6 text-sm text-[var(--color-muted)]">Asking about: <strong className="text-[var(--color-ink-2)]">{pricingInterestLabels[initialInterest]}</strong></p> : null}
       <div className="form-grid">
-        <Field label="What kind of help do you need?" error={errors.projectType} htmlFor="project-type">
+        <Field label="Company Name" error={errors.company} htmlFor="company">
+          <input
+            aria-describedby={errors.company ? "company-error" : undefined}
+            aria-invalid={Boolean(errors.company)}
+            autoComplete="organization"
+            id="company"
+            onBlur={() => validateField("company")}
+            onChange={(event) => update("company", event.target.value)}
+            placeholder="Your company name"
+            required
+            value={enquiry.company}
+          />
+        </Field>
+        <Field label="Work Email" error={errors.email} htmlFor="email">
+          <input
+            aria-describedby={errors.email ? "email-error" : undefined}
+            aria-invalid={Boolean(errors.email)}
+            autoComplete="email"
+            id="email"
+            onBlur={() => validateField("email")}
+            onChange={(event) => update("email", event.target.value)}
+            placeholder="you@company.com"
+            required
+            type="email"
+            value={enquiry.email}
+          />
+        </Field>
+        <Field label="Project type" error={errors.projectType} htmlFor="project-type">
           <select
             aria-describedby={errors.projectType ? "project-type-error" : undefined}
             aria-invalid={Boolean(errors.projectType)}
@@ -122,81 +140,25 @@ export function ProjectBriefForm({ initialInterest }: { initialInterest?: Pricin
             required
             value={enquiry.projectType}
           >
-            <option value="">Select an area...</option>
+            <option value="">Select project type</option>
             {projectTypeOptions.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
           </select>
         </Field>
-        <Field label="When do you want to start?" hint="Optional" htmlFor="timeline">
-          <select id="timeline" onChange={(event) => update("timeline", event.target.value)} value={enquiry.timeline}>
-            <option value="">Select one...</option>
-            <option value="Just exploring options">Just exploring options</option>
-            <option value="As soon as possible">As soon as possible</option>
-            <option value="In the next few months">In the next few months</option>
-            <option value="No fixed timeline">No fixed timeline</option>
-          </select>
-        </Field>
       </div>
-      <Field label="What do you need help with?" error={errors.message} htmlFor="message">
+      <Field label="Tell us about your project" error={errors.message} htmlFor="message">
         <textarea
           aria-describedby={errors.message ? "message-error" : undefined}
           aria-invalid={Boolean(errors.message)}
           id="message"
           onBlur={() => validateField("message")}
           onChange={(event) => update("message", event.target.value)}
-          placeholder="What are the main challenges you're facing, or what goals are you trying to hit? (e.g., enquiries are getting missed, tracking orders is too manual, or you need a better website)."
+          placeholder="Describe your vision, timeline, must-have features..."
           required
           rows={6}
           value={enquiry.message}
         />
       </Field>
-      <div className="form-grid">
-        <Field label="Your name" error={errors.name} htmlFor="name">
-          <input
-            aria-describedby={errors.name ? "name-error" : undefined}
-            aria-invalid={Boolean(errors.name)}
-            autoComplete="name"
-            id="name"
-            onBlur={() => validateField("name")}
-            onChange={(event) => update("name", event.target.value)}
-            required
-            value={enquiry.name}
-          />
-        </Field>
-        <Field label="Email address" error={errors.email} htmlFor="email">
-          <input
-            aria-describedby={errors.email ? "email-error" : undefined}
-            aria-invalid={Boolean(errors.email)}
-            autoComplete="email"
-            id="email"
-            onBlur={() => validateField("email")}
-            onChange={(event) => update("email", event.target.value)}
-            required
-            type="email"
-            value={enquiry.email}
-          />
-        </Field>
-        <Field label="Business name" hint="Optional" htmlFor="company">
-          <input
-            autoComplete="organization"
-            id="company"
-            onChange={(event) => update("company", event.target.value)}
-            value={enquiry.company}
-          />
-        </Field>
-        <Field label="Website or social link" hint="Optional" error={errors.companyWebsite} htmlFor="company-website">
-          <input
-            aria-describedby={errors.companyWebsite ? "company-website-error" : undefined}
-            aria-invalid={Boolean(errors.companyWebsite)}
-            id="company-website"
-            inputMode="url"
-            onBlur={() => validateField("companyWebsite")}
-            onChange={(event) => update("companyWebsite", event.target.value)}
-            placeholder="https://"
-            type="url"
-            value={enquiry.companyWebsite}
-          />
-        </Field>
-      </div>
+      
       <div aria-hidden="true" className="hidden">
         <label htmlFor="office-location">Office location</label>
         <input autoComplete="off" id="office-location" name="office-location" onChange={(event) => update("officeLocation", event.target.value)} tabIndex={-1} value={enquiry.officeLocation} />

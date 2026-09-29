@@ -79,7 +79,10 @@ export function SiteHeader() {
             </NavigationMenu>
           </div>
 
-          <div className="site-header__actions ml-auto">
+          <div className="site-header__actions ml-auto flex items-center gap-4">
+            <Button asChild className="hidden lg:inline-flex" size="sm" variant="primary">
+              <Link href="/start-a-project">Start a Project</Link>
+            </Button>
             <Dialog.Trigger asChild>
               <Button className="site-menu-button lg:hidden" size="icon" variant="icon" aria-label="Open navigation menu">
                 <Menu aria-hidden="true" size={20} />
@@ -111,6 +114,13 @@ export function SiteHeader() {
                   </Link>
                 </Dialog.Close>
               ))}
+            </div>
+            <div className="mt-8 flex flex-col pt-4">
+              <Dialog.Close asChild>
+                <Button asChild className="w-full" size="lg" variant="primary">
+                  <Link href="/start-a-project">Start a Project</Link>
+                </Button>
+              </Dialog.Close>
             </div>
           </div>
         </Dialog.Content>

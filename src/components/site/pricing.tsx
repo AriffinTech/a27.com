@@ -9,22 +9,22 @@ type PricingProps = { compact?: boolean };
 
 const packages = [
   {
-    title: "Website Starter", price: "From RM399", interest: "website-starter",
+    title: "Website Starter", price: "From RM799", interest: "website-starter",
     description: "A clean, professional website that makes it easy for customers to understand and contact you.",
-    items: ["Landing page or simple business website", "Mobile-ready design", "WhatsApp and contact actions", "Basic SEO setup", "Clear plan and revision rounds", "Ready for your own domain"],
-    whatsapp: "Hello A27, I’m interested in the Website Starter package.", variant: "secondary" as const, action: "Start with Website Starter",
+    items: ["Up to 5 pages (e.g. Home, About, Services)", "Custom mobile-responsive design", "Basic SEO & Analytics setup", "WhatsApp and quick-contact actions", "2 rounds of design revisions", "Domain & hosting setup assistance"],
+    whatsapp: "Hello A27, I’m interested in the Website Starter package.", variant: "primary" as const, action: "Start with Website Starter",
   },
   {
-    title: "Website + Connected Tools", price: "From RM699", interest: "connected-website",
+    title: "Website + Connected Tools", price: "From RM1299", interest: "connected-website",
     description: "A website connected to the tools you already use, so enquiries and bookings are easier to manage.",
-    items: ["Everything in Website Starter", "Lead capture forms", "WhatsApp enquiry flow", "Connect your customer list or spreadsheet", "Send work to the right place", "Basic team setup and walkthrough"],
+    items: ["Everything in Website Starter", "Content Management System (CMS)", "Advanced lead capture forms", "Connect your CRM or spreadsheet", "Basic booking or scheduling flow", "Admin dashboard & team walkthrough"],
     whatsapp: "Hello A27, I’m interested in the Website + Connected Tools package.", variant: "primary" as const, action: "Plan connected tools",
   },
   {
     title: "Custom Tools & Automation", price: "Custom Quotation", interest: "custom-tools",
     description: "A system, dashboard, or automation made around how your team handles daily work.",
     items: ["WhatsApp replies and follow-ups", "Order and payment tracking", "Automatic invoices and receipts", "Team dashboards and admin tools", "Connect third-party services", "Custom AI help or software"],
-    whatsapp: "Hello A27, I’d like to discuss a custom system or automation need.", variant: "secondary" as const, action: "Discuss custom tools",
+    whatsapp: "Hello A27, I’d like to discuss a custom system or automation need.", variant: "primary" as const, action: "Discuss custom tools",
   },
 ] as const;
 
@@ -48,7 +48,9 @@ export function Pricing({ compact = false }: PricingProps) {
           </CardContent>
           <CardFooter className="mt-auto flex-col gap-3">
             <Button asChild variant={item.variant} className="w-full"><Link href={`/start-a-project?interest=${item.interest}`}>{item.action}</Link></Button>
-            <a className="text-link min-h-11" href={getWhatsAppUrl(item.whatsapp)} target="_blank" rel="noopener noreferrer">Prefer WhatsApp?</a>
+            <Button asChild className="w-full border-0 text-white" style={{ backgroundColor: "#25D366" }}>
+              <a href={getWhatsAppUrl(item.whatsapp)} target="_blank" rel="noopener noreferrer">Prefer WhatsApp?</a>
+            </Button>
           </CardFooter>
         </Card>
       ))}

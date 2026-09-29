@@ -1,0 +1,4 @@
+interface:
+  display_name: "A27 Design DNA"
+  short_description: "Build brand-adapted sites with A27 design DNA"
+  default_prompt: "Use $a27-design-dna to design and build a brand-adapted, responsive website from this brief."

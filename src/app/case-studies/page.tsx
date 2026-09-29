@@ -22,7 +22,7 @@ export default function CaseStudiesPage() {
         <div className="flex-col !items-start">
           <span>A look at websites, business systems, dashboards and automation we’ve built to solve actual operational problems.</span>
         </div>
-        <Button asChild className="mt-6" size="lg" variant="primary"><Link href="/start-a-project">Start a Project</Link></Button>
+        <Button asChild className="mt-6 w-fit" size="lg" variant="primary"><Link href="/start-a-project">Start a Project</Link></Button>
       </section>
       <Portfolio />
       <CtaBand
