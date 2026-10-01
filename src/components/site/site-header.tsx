@@ -80,7 +80,7 @@ export function SiteHeader() {
           </div>
 
           <div className="site-header__actions ml-auto flex items-center gap-4">
-            <Button asChild className="hidden lg:inline-flex" size="sm" variant="primary">
+            <Button asChild className="hidden lg:inline-flex" size="default" variant="primary">
               <Link href="/start-a-project">Start a Project</Link>
             </Button>
             <Dialog.Trigger asChild>
